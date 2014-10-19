@@ -32,31 +32,30 @@ function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
 endfunction
 
 " Moving back and forth between lines of same or lower indentation.
-nnoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
-nnoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
-nnoremap <silent> [L :call NextIndent(0, 0, 1, 1)<CR>
-nnoremap <silent> ]L :call NextIndent(0, 1, 1, 1)<CR>
-vnoremap <silent> [l <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
-vnoremap <silent> ]l <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-vnoremap <silent> [L <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
-vnoremap <silent> ]L <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
-onoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
-onoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
-onoremap <silent> [L :call NextIndent(1, 0, 1, 1)<CR>
-onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
+"nnoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
+"nnoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
+"nnoremap <silent> [L :call NextIndent(0, 0, 1, 1)<CR>
+"nnoremap <silent> ]L :call NextIndent(0, 1, 1, 1)<CR>
+"vnoremap <silent> [l <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+"vnoremap <silent> ]l <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+"vnoremap <silent> [L <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
+"vnoremap <silent> ]L <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
+"onoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
+"onoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
+"onoremap <silent> [L :call NextIndent(1, 0, 1, 1)<CR>
+"onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 
 
-function! Demo()
-  let curline = getline('.')
+function! AskFunctionName()
   call inputsave()
-  let name = input('Enter name: ')
+  let name = input('Method name: ')
   call inputrestore()
-  call setline('.', curline . '6' . name)
+  return name
 endfunction
 "work in progress
 " 1) select line 
 " 2) cut line
-" 3) input fonction name
+  " 3) input fonction name
 " 4) write fonction name
 " 5) move next indent lower level
 " 6) write function name
@@ -70,7 +69,23 @@ endfunction
 "
 " NOTO select lines with V<n>G  for current to target line
 "
-function! CoffeeExtractMethod()
+function! CoffeeExtractMethod() range
+  let name = AskFunctionName()
+  let selection = getline(a:firstline, a:lastline)
+  let curline = getline('.')
   " 1) select line 
   " 2) cut line
+  execute "normal! " .  a:firstline . ',' . a:lastline . "d<CR>"
+  let selectiona = common#cut_visual_selection()
+  call append('.', '@' . name . '()')
+  execute "normal! G"
+  call append('.', name . ': ->')
+  for i in selection
+    "call setline('.', curline . '6' . name . i )
+    execute "normal! G"
+    call append('.', i)
+  endfor
+  execute "normal! \"kdG\"kp"
 endfunction
+
+map <leader>pt V4j:call CoffeeExtractMethod()<CR>
