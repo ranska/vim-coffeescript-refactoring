@@ -54,3 +54,23 @@ function! Demo()
   call setline('.', curline . '6' . name)
 endfunction
 "work in progress
+" 1) select line 
+" 2) cut line
+" 3) input fonction name
+" 4) write fonction name
+" 5) move next indent lower level
+" 6) write function name
+" 7) paste core method
+" message for check params
+"
+
+" simple version: extract method with name and past at endoffile
+"
+
+"
+" NOTO select lines with V<n>G  for current to target line
+"
+function! CoffeeExtractMethod()
+  " 1) select line 
+  " 2) cut line
+endfunction
