@@ -71,12 +71,9 @@ endfunction
 "
 function! CoffeeExtractMethod() range
   let name = AskFunctionName()
-  let selection = getline(a:firstline, a:lastline)
-  let curline = getline('.')
-  " 1) select line 
-  " 2) cut line
-  execute "normal! " .  a:firstline . ',' . a:lastline . "d<CR>"
-  let selectiona = common#cut_visual_selection()
+  "let selection = getline(a:firstline, a:lastline)
+  "let curline = getline('.')
+  let selection = split(common#cut_visual_selection(), '\n')
   call append('.', '@' . name . '()')
   execute "normal! G"
   call append('.', name . ': ->')
