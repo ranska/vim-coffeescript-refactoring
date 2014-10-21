@@ -54,9 +54,10 @@ function! AskFunctionName()
 endfunction
 "work in progress
 " 1) select line 
+" https://github.com/ecomba/vim-ruby-refactoring/blob/master/plugin/refactorings/general/extractmethod.vim
 " 2) cut line
-  " 3) input fonction name
-" 4) write fonction name
+" 3) input fonction name
+"---> 4) write fonction name
 " 5) move next indent lower level
 " 6) write function name
 " 7) paste core method
@@ -67,14 +68,17 @@ endfunction
 "
 
 "
-" NOTO select lines with V<n>G  for current to target line
+function! AppendNameIndented(name, indent)
+  call append('.', repeat(' ', a:indent) . '@' . a:name . '()')
+endfunction
+
+"
 "
 function! CoffeeExtractMethod() range
-  let name = AskFunctionName()
-  "let selection = getline(a:firstline, a:lastline)
-  "let curline = getline('.')
+  let name      = AskFunctionName()
+  let indent    = indent(line('.'))
   let selection = split(common#cut_visual_selection(), '\n')
-  call append('.', '@' . name . '()')
+  call AppendNameIndented(name, indent)
   execute "normal! G"
   call append('.', name . ': ->')
   for i in selection
