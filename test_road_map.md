@@ -36,7 +36,7 @@ if you have allready install vim with brew
 ```
 brew uninstall vim
 brew update
-$ brew install vim --override-system-vi --with-client-server 
+brew install vim --override-system-vi --with-client-server 
       
       ## see brew options vim
       ## --with-lua \
