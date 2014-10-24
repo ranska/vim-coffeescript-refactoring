@@ -86,20 +86,31 @@ end
 #vim.normal('Vjj:Linediff<cr>')
 describe "coffee" do
   let(:filename) { 'test.coffee' }
-  puts 'one'
   specify "functions" do
-    puts 'two'
     vim.insert 'toto'
     #vim.command('LinediffReset')
 
-    assert_file_contents <<-EOF
+    set_file_contents <<-EOF
 (foo, bar) ->
 console.log foo
     EOF
-    puts 'two'
     #join
-    puts 'two'
     assert_file_contents "(foo, bar) -> console.log foo"
   end
   #vim.kill
 end
+
+#
+# test extract method
+#
+# avec 1 niveau de prof
+#
+# 0 niveau
+#
+# 2 ou 3
+#
+# avec fat ou normal arrow
+#
+#  
+#
+#
