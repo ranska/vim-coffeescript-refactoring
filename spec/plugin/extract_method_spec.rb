@@ -1,39 +1,4 @@
-require 'vimrunner'
-require 'vimrunner/rspec'
-
-Vimrunner::RSpec.configure do |config|
-  config.reuse_server = true
-  plugin_path = File.expand_path('.')
-  config.start_vim do
-    vim = Vimrunner.start_gvim
-    #vim.add_plugin(plugin_path, 'plugin/splitjoin.vim')
-    vim
-  end
-end
-module Support
-  module Vim
-    def set_file_contents(string)
-      write_file(filename, string)
-      vim.edit!(filename)
-    end
-    def split
-      vim.command 'SplitjoinSplit'
-      vim.write
-    end
-    def join
-      vim.command 'SplitjoinJoin'
-      vim.write
-    end
-    def assert_file_contents(string)
-      string = normalize_string_indent(string)
-      IO.read(filename).strip.should eq string
-    end
-  end
-end
-RSpec.configure do |config|
-  config.include Support::Vim
-end
-
+require 'spec_helper'
 #Feature: Extract Method :RExtractMethod
 #  Extracts the selected code into a new method of its own.
 
