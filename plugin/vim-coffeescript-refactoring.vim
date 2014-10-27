@@ -74,7 +74,7 @@ endfunction
 
 "
 "
-function! CoffeeExtractMethod() range
+function! CRExtractMethod() range
   let name      = AskFunctionName()
   let indent    = indent(line('.'))
   let selection = split(common#cut_visual_selection(), '\n')
@@ -89,4 +89,6 @@ function! CoffeeExtractMethod() range
   execute "normal! \"kdG\"kp"
 endfunction
 
+function! CRExtractMethod() 
+endfunction
 map <leader>pt V4j:call CoffeeExtractMethod()<CR>
