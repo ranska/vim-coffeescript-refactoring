@@ -34,7 +34,6 @@ RSpec.configure do |config|
   config.include Support::Vim
 end
 
-describe "coffee" do
 #Feature: Extract Method :RExtractMethod
 #  Extracts the selected code into a new method of its own.
 
@@ -42,10 +41,11 @@ describe "coffee" do
 #      :RExtractMethod
 #      <leader>rem
 
-#  Scenario: Extract one line assignment into a new method
-#    Given I have the following code:
-  let(:filename) { 'test.coffee' }
-  specify "functions" do
+describe "extract method" do
+  let(:filename) { 'extract_method.coffee' }
+  #  Scenario: Extract one line assignment into a new method
+  #    Given I have the following code:
+  specify "with params" do
     set_file_contents <<-EOF
 class Foo
   method_one: ->
@@ -59,13 +59,12 @@ class Foo
     five = two + three
     six = five + one
     EOF
-    #    When I select "two + three" and execute:
-    #"""
-    #:RExtractMethod
-    #"""
-#    And I fill in the parameter "add"
+    # When I select "two + three" and execute:
+    vim.command 'RExtractMethod'
+    # And I fill in the parameter "add"
+    vim.feedkeys 'add\<C-R>'
 
-#    Then I should see:
+    #    Then I should see:
     assert_file_contents <<-EOF 
 class Foo
   method_one: ->
