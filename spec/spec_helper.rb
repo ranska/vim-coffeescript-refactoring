@@ -7,9 +7,10 @@ Vimrunner::RSpec.configure do |config|
 
   plugin_path = File.expand_path('.')
 
+  puts plugin_path
   config.start_vim do
     vim = Vimrunner.start_gvim
-    vim.add_plugin(plugin_path, 'plugin/switch.vim')
+    vim.add_plugin(plugin_path, 'plugin/vim-coffeescript-refactoring.vim')
 
     def vim.switch
       command 'Switch'

@@ -25,7 +25,7 @@ class Foo
     six = five + one
     EOF
     # When I select "two + three" and execute:
-    vim.command 'CRExtractMethod'
+    vim.command 'call CRExtractMethod()'
     # And I fill in the parameter "add"
     vim.feedkeys 'add\<C-R>'
 
