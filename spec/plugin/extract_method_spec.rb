@@ -25,9 +25,22 @@ class Foo
     six = five + one
     EOF
     # When I select "two + three" and execute:
-    vim.command 'call CRExtractMethod()'
+    # TODO select line helper
+    vim.command 'set number'
+    vim.command 'hi Visual  guifg=#FFFF00 guibg=#003322 gui=none'
+    vim.edit filename
+    #vim.insert ''
+    vim.feedkeys '\\<esc>'
+    sleep 2
+    vim.write
+    vim.feedkeys '8GVG'
+    #vim.command 'call CRExtractMethod()'
+    sleep 2
+    vim.feedkeys ':call CRExtractMethod()\\<CR>'
+    sleep 2
     # And I fill in the parameter "add"
-    vim.feedkeys 'add\<C-R>'
+    vim.feedkeys 'add\<CR>'
+    sleep 2
 
     #    Then I should see:
     assert_file_contents <<-EOF 
