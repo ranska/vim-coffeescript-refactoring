@@ -36,11 +36,13 @@ class Foo
     vim.feedkeys '8GVG'
     #vim.command 'call CRExtractMethod()'
     sleep 2
-    vim.feedkeys ':call CRExtractMethod()\\<CR>'
+    #vim.feedkeys ':call CRExtractMethod()\\<CR>'
+    vim.type ':call CRExtractMethod()'
+    vim.feedkeys '\\<CR>'
     sleep 2
     # And I fill in the parameter "add"
-    vim.feedkeys 'add\<CR>'
-    sleep 2
+    vim.feedkeys 'add\\<CR>'
+    sleep 5
 
     #    Then I should see:
     assert_file_contents <<-EOF 

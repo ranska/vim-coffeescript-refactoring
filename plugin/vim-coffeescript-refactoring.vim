@@ -89,6 +89,6 @@ function! CRExtractMethod() range
   execute "normal! \"kdG\"kp"
 endfunction
 
-function! CRExtractMethod() 
-endfunction
-map <leader>pt V4j:call CoffeeExtractMethod()<CR>
+"function! CRExtractMethod() 
+"endfunction
+"map <leader>pt V4j:call CoffeeExtractMethod()<CR>
