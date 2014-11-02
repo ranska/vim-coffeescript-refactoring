@@ -12,9 +12,9 @@ Vimrunner::RSpec.configure do |config|
     vim = Vimrunner.start_gvim
     vim.add_plugin(plugin_path, 'plugin/vim-coffeescript-refactoring.vim')
 
-    def vim.switch
-      command 'Switch'
-      write
+    def vim.select_lines first, last
+      num_line = last - first
+      feedkeys "#{first}GV#{num_line}j"
       self
     end
 

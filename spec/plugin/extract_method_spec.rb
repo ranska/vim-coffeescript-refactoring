@@ -33,7 +33,8 @@ class Foo
     vim.feedkeys '\\<esc>'
     sleep 2
     vim.write
-    vim.feedkeys '8GVG'
+    vim.select_lines 8, 11
+    #vim.feedkeys '8GVG'
     #vim.command 'call CRExtractMethod()'
     sleep 2
     #vim.feedkeys ':call CRExtractMethod()\\<CR>'
