@@ -24,18 +24,13 @@ class Foo
     five = two + three
     six = five + one
     EOF
-    # When I select "two + three" and execute:
-    # TODO select line helper
     vim.command 'set number'
     vim.command 'hi Visual  guifg=#FFFF00 guibg=#003322 gui=none'
     vim.edit filename
-    #vim.insert ''
     vim.feedkeys '\\<esc>'
     sleep 2
     vim.write
     vim.select_lines 8, 11
-    #vim.feedkeys '8GVG'
-    #vim.command 'call CRExtractMethod()'
     sleep 2
     #vim.feedkeys ':call CRExtractMethod()\\<CR>'
     vim.type ':call CRExtractMethod()'
@@ -69,5 +64,3 @@ end
 # NOTE test first extract method 
 # without params
 #
-
-
