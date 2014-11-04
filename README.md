@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/ranska/vim-coffeescript-refactoring.png?label=ready&title=Ready)](https://waffle.io/ranska/vim-coffeescript-refactoring)
 vim-coffeescript-refactoring
 ============================
 
