@@ -92,3 +92,15 @@ endfunction
 "function! CRExtractMethod() 
 "endfunction
 "map <leader>pt V4j:call CoffeeExtractMethod()<CR>
+function! CRAddParameter() range
+  " todo refactor ask_for_a_name
+  let name      = AskFunctionName()
+
+  "find the first -> or => backward
+  " ? How to know witch one is the shortest
+  " check 
+  " parenthesis 
+  " there allrady params
+  " add param
+endfunction
+
