@@ -46,9 +46,9 @@ endfunction
 "onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 
 
-function! AskFunctionName()
+function! AskFor(something)
   call inputsave()
-  let name = input('Method name: ')
+  let name = input(a:something . ': ')
   call inputrestore()
   return name
 endfunction
@@ -75,7 +75,7 @@ endfunction
 "
 "
 function! CRExtractMethod() range
-  let name      = AskFunctionName()
+  let name      = AskFor('Method name')
   let indent    = indent(line('.'))
   let selection = split(common#cut_visual_selection(), '\n')
   call AppendNameIndented(name, indent)
@@ -89,15 +89,17 @@ function! CRExtractMethod() range
   execute "normal! \"kdG\"kp"
 endfunction
 
-"function! CRExtractMethod() 
-"endfunction
-"map <leader>pt V4j:call CoffeeExtractMethod()<CR>
+"
+"
+"
 function! CRAddParameter() range
-  " todo refactor ask_for_a_name
-  let name      = AskFunctionName()
+  let name = AskFor('Parameter name')
 
   "find the first -> or => backward
   " ? How to know witch one is the shortest
+  " 1 backward pattern (-> or =>)
+  " ?->\|=>
+  "
   " check 
   " parenthesis 
   " there allrady params
