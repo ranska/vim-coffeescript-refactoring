@@ -96,12 +96,28 @@ function! CRAddParameter() range
   let name = AskFor('Parameter name')
 
   "find the first -> or => backward
-  " ? How to know witch one is the shortest
-  " 1 backward pattern (-> or =>)
   " ?->\|=>
   "
   " check 
   " parenthesis 
+  " 1 there is parentesis
+
+  " yop 
+
+  " () ->
+  " foo ->
+  " ->
+  " (foo) ->
+  " bar (foo) ->
+
+  " nope 
+  " bar( ->
+  "  foo
+  " )
+  " bar(foo) ->
+  " bar(foo)() ->
+
+
   " there allrady params
   " add param
 endfunction
