@@ -100,7 +100,7 @@ function! CRAddParameter() range
   "
   " check 
   " parenthesis 
-  " 1 there is parentesis
+  " ifthere is parentesis
 
   " yop 
 

@@ -10,14 +10,54 @@ describe "extract method" do
   let(:filename) { 'extract_method.coffee' }
   #  Scenario: Extract one line assignment into a new method
   #    Given I have the following code:
-  specify "with params" do
+  describe "without parenthesis" do
+    specify "begin off line" do
     set_file_contents <<-EOF
-    write spec for 
-    object_member: -> 
-    object_fat_arrow: =>
-    var = ->
-    var_fat = =>
-    EOF
+-> 
+EOF
+    add_parameter
+    assert_file_contents <<-EOF 
+(new_param) ->
+EOF
+    end
+
+    specify "as function argument" do
+    set_file_contents <<-EOF
+foo -> 
+EOF
+    add_parameter
+    assert_file_contents <<-EOF 
+foo (new_param) ->
+EOF
+    end
+
+    specify "in a function of fuction call" do
+    set_file_contents <<-EOF
+bar(foo) ->
+bar(foo)() ->
+-> 
+EOF
+    add_parameter
+    assert_file_contents <<-EOF 
+bar(foo) (new_param) ->
+bar(foo)() (new_param) ->
+EOF
+    end
+  end
+
+  # bar( ->
+  #  foo
+  # )
+
+  describe "with parenthesis" do
+    # () ->
+    # (foo) ->
+    # bar (foo) ->
+  end
+end
+
+
+def add_parameter
     vim.command 'set number'
     vim.command 'hi Visual  guifg=#FFFF00 guibg=#003322 gui=none'
     vim.edit filename
@@ -26,22 +66,13 @@ describe "extract method" do
     vim.write
     vim.select_lines 8, 11
     sleep 2
-    #vim.feedkeys ':call CRExtractMethod()\\<CR>'
     vim.type ':call CRAddParameter()'
     vim.feedkeys '\\<CR>'
     sleep 2
     # And I fill in the parameter "add"
-    vim.feedkeys 'add\\<CR>'
+    vim.feedkeys 'new_param\\<CR>'
     sleep 5
-
     #    Then I should see:
-    assert_file_contents <<-EOF 
-    object_member: (add) -> 
-    object_fat_arrow: (add) =>
-    var = (add) ->
-    var_fat = (add) =>
-    EOF
-  end
 end
 
 #
