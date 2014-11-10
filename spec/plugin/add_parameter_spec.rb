@@ -6,7 +6,7 @@ require 'spec_helper'
 #      :RExtractMethod
 #      <leader>rem
 
-describe "extract method" do
+describe "Add parameter" do
   let(:filename) { 'extract_method.coffee' }
   #  Scenario: Extract one line assignment into a new method
   #    Given I have the following code:
@@ -14,13 +14,16 @@ describe "extract method" do
     specify "begin off line" do
     set_file_contents <<-EOF
 -> 
+  toto + 3
 EOF
     add_parameter
     assert_file_contents <<-EOF 
 (new_param) ->
+  toto + 3
 EOF
     end
 
+=begin
     specify "as function argument" do
     set_file_contents <<-EOF
 foo -> 
@@ -43,6 +46,7 @@ bar(foo) (new_param) ->
 bar(foo)() (new_param) ->
 EOF
     end
+=end
   end
 
   # bar( ->
@@ -62,16 +66,15 @@ def add_parameter
     vim.command 'hi Visual  guifg=#FFFF00 guibg=#003322 gui=none'
     vim.edit filename
     vim.feedkeys '\\<esc>'
-    sleep 2
     vim.write
-    vim.select_lines 8, 11
-    sleep 2
+    sleep 1
+    vim.feedkeys 'G'
     vim.type ':call CRAddParameter()'
     vim.feedkeys '\\<CR>'
-    sleep 2
+    sleep 1
     # And I fill in the parameter "add"
     vim.feedkeys 'new_param\\<CR>'
-    sleep 5
+    sleep 3
     #    Then I should see:
 end
 

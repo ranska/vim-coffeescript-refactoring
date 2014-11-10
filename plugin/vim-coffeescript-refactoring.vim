@@ -96,7 +96,7 @@ function! CRAddParameter() range
   let name = AskFor('Parameter name')
 
   "find the first -> or => backward
-  " ?->\|=>
+  execute "normal! ?->\|=>"
   "
   " check 
   " parenthesis 
