@@ -13,7 +13,7 @@ describe "Add parameter" do
   describe "without parenthesis" do
     specify "begin off line" do
     set_file_contents <<-EOF
--> 
+->
   toto + 3
 EOF
     add_parameter
@@ -67,14 +67,15 @@ def add_parameter
     vim.edit filename
     vim.feedkeys '\\<esc>'
     vim.write
-    sleep 1
+    #sleep 1
     vim.feedkeys 'G'
     vim.type ':call CRAddParameter()'
     vim.feedkeys '\\<CR>'
-    sleep 1
+    #sleep 1
     # And I fill in the parameter "add"
     vim.feedkeys 'new_param\\<CR>'
-    sleep 3
+    #sleep 3
+    vim.write
     #    Then I should see:
 end
 
