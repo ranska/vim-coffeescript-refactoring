@@ -3,17 +3,22 @@ vim-coffeescript-refactoring
 ============================
 
 Refactoring tool for Coffeescript in vim!
+same feeling has [vim-ruby-refactoring](https://github.com/ecomba/vim-ruby-refactoring)
+Thanks to [AndrewRadev](https://github.com/AndrewRadev)
 
 Current work in progress
 ========================
-Extract Method
+```
+  :CRAddParameter           - Add Parameter 
+  :CRExtractMethod          - Extract Method   
+```
 
 Test Road map
 ========
 
 - test on travis
-- cucumber test
-- test with vim runner
+- improve practive in vimrunner
+
 
 Vim ecosystem Road map
 ======================
@@ -27,14 +32,12 @@ Partern Road map
 ================
 
 ```
-  :RAddParameter           - Add Parameter 
-  :RInlineTemp             - Inline Temp
-  :RConvertPostConditional - Convert Post Conditional
-  :RExtractConstant        - Extract Constant          
-  :RExtractLocalVariable   - Extract Local Variable    
-  :RRenameLocalVariable    - Rename Local Variable     
-  :RRenameInstanceVariable - Rename Instance Variable  
-  :RExtractMethod          - Extract Method   
+  :CRInlineTemp             - Inline Temp
+  :CRConvertPostConditional - Convert Post Conditional
+  :CRExtractConstant        - Extract Constant          
+  :CRExtractLocalVariable   - Extract Local Variable    
+  :CRRenameLocalVariable    - Rename Local Variable     
+  :CRRenameInstanceVariable - Rename Instance Variable  
 ```
 
 
