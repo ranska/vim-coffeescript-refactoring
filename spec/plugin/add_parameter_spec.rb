@@ -11,7 +11,7 @@ describe "Add parameter" do
   #  Scenario: Extract one line assignment into a new method
   #    Given I have the following code:
   describe "without parenthesis" do
-    specify "begin off line" do
+    specify "begin off line simple arrow" do
     set_file_contents <<-EOF
 ->
   toto + 3
@@ -23,7 +23,19 @@ EOF
 EOF
     end
 
-=begin
+    specify "begin off line fat arrow" do
+    set_file_contents <<-EOF
+=>
+  toto + 3
+EOF
+    add_parameter
+    assert_file_contents <<-EOF 
+(new_param) =>
+  toto + 3
+EOF
+    end
+
+
     specify "as function argument" do
     set_file_contents <<-EOF
 foo -> 
@@ -34,6 +46,7 @@ foo (new_param) ->
 EOF
     end
 
+=begin
     specify "in a function of fuction call" do
     set_file_contents <<-EOF
 bar(foo) ->

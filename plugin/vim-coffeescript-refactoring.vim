@@ -104,7 +104,7 @@ function! CRAddParameter() range
   " Move backwards to the method definiton if you are not already on the
   " correct line
   if empty(matchstr(getline("."), '\<->\>'))
-    exec "?->"
+    exec "?->\\|=>"
   endif
 
   let closing_bracket_index = stridx(getline("."), ")")
