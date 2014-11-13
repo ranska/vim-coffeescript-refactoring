@@ -11,6 +11,7 @@ Vimrunner::RSpec.configure do |config|
   config.start_vim do
     vim = Vimrunner.start_gvim
     vim.add_plugin(plugin_path, 'plugin/vim-coffeescript-refactoring.vim')
+    #vim.add_plugin(plugin_path,'../.mvimrc')
 
     def vim.select_lines first, last
       num_line = last - first

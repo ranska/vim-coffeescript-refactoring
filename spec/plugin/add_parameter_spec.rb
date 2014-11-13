@@ -38,7 +38,7 @@ EOF
 
     specify "as function argument" do
     set_file_contents <<-EOF
-foo -> 
+foo ->
 EOF
     add_parameter
     assert_file_contents <<-EOF 
@@ -46,6 +46,7 @@ foo (new_param) ->
 EOF
     end
 
+#foo (new_param) -> foo (new_param) ->
 =begin
     specify "in a function of fuction call" do
     set_file_contents <<-EOF
@@ -70,6 +71,26 @@ EOF
     # () ->
     # (foo) ->
     # bar (foo) ->
+    specify "without a parameter" do
+    set_file_contents <<-EOF
+() ->
+EOF
+    add_parameter
+    assert_file_contents <<-EOF 
+(new_param) ->
+EOF
+    end
+
+    specify "with a parameter" do
+    set_file_contents <<-EOF
+(old_param) ->
+EOF
+    add_parameter
+    assert_file_contents <<-EOF 
+(old_param, new_param) ->
+EOF
+    end
+
   end
 end
 
@@ -87,7 +108,7 @@ def add_parameter
     #sleep 1
     # And I fill in the parameter "add"
     vim.feedkeys 'new_param\\<CR>'
-    #sleep 3
+    #♥sleep 3
     vim.write
     #    Then I should see:
 end

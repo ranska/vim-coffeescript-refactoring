@@ -111,12 +111,17 @@ function! CRAddParameter() range
   let opening_bracket_index = stridx(getline("."), "(")
 
   if closing_bracket_index == -1
-    execute "normal i(" . name . ") \<Esc>"
+    " execute "normal i(" . name . ") \<Esc>"
+    " :s/.*\zs)\s\?[-=]>/, new_param&/
+    execute "normal :s/[-=]>/(". name . ") &/\<CR>" 
+    "execute "normal :s/\.\\*\\zs)\\s\\?[-=]>/, ". name . "&/\<CR>" 
     " there is an open & close paren but no parameters
   elseif opening_bracket_index != -1 && opening_bracket_index == closing_bracket_index - 1
-    exec ':s/)/' . name . ')/'
+    "exec ':s/)/' . name . ')/'
+    execute "normal :s/)\\s\\?[-=]>/". name . "&/\<CR>" 
   else
-    exec ':.s/)/, ' . name . ')/'
+    "exec ':.s/)/, ' . name . ')/'
+    execute "normal :s/)\\s\\?[-=]>/, ". name . "&/\<CR>" 
   endif
 
   " Restore caret position
