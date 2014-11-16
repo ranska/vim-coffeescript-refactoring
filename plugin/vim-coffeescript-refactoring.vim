@@ -1,3 +1,6 @@
+" Load all refactoring recipes
+exec 'runtime ' . resolve(expand('<sfile>:p:h')) . '/patterns/all/*.vim'
+
 " Jump to the next or previous line that has the same level or a lower
 " level of indentation than the current line.
 "

@@ -1,4 +1,6 @@
 require 'spec_helper'
+
+
 #Feature: Extract Method :RExtractMethod
 #  Extracts the selected code into a new method of its own.
 
@@ -23,7 +25,10 @@ EOF
 EOF
     end
 
+    #
+    #
     specify "begin off line fat arrow" do
+    skip
     set_file_contents <<-EOF
 =>
   toto + 3
@@ -35,8 +40,10 @@ EOF
 EOF
     end
 
-
+    #
+    #
     specify "as function argument" do
+    skip
     set_file_contents <<-EOF
 foo ->
 EOF
@@ -72,16 +79,19 @@ EOF
     # (foo) ->
     # bar (foo) ->
     specify "without a parameter" do
+    skip
     set_file_contents <<-EOF
 () ->
 EOF
     add_parameter
+    skip
     assert_file_contents <<-EOF 
 (new_param) ->
 EOF
     end
 
     specify "with a parameter" do
+    skip
     set_file_contents <<-EOF
 (old_param) ->
 EOF
@@ -101,14 +111,14 @@ def add_parameter
     vim.edit filename
     vim.feedkeys '\\<esc>'
     vim.write
-    #sleep 1
+    #sleep 3
     vim.feedkeys 'G'
     vim.type ':call CRAddParameter()'
     vim.feedkeys '\\<CR>'
-    #sleep 1
+    sleep 1
     # And I fill in the parameter "add"
     vim.feedkeys 'new_param\\<CR>'
-    #♥sleep 3
+    #sleep 1
     vim.write
     #    Then I should see:
 end
