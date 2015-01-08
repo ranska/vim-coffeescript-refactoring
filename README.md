@@ -28,7 +28,7 @@ Vim ecosystem Road map
 - nnoramp default write on readme
 
  
-Partern Road map
+Paterns Road map
 ================
 
 ```
@@ -40,4 +40,12 @@ Partern Road map
   :CRRenameInstanceVariable - Rename Instance Variable  
 ```
 
+How to run tests
+================
+
+Use rspec
+
+```
+  rspec spec/plugin/add_parameter_spec.rb
+```
 
