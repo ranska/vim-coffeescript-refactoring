@@ -75,19 +75,46 @@ function! AppendNameIndented(name, indent)
   call append('.', repeat(' ', a:indent) . '@' . a:name . '()')
 endfunction
 
-"
+function! AppendIndented(text, indent)
+  call append('.', repeat(' ', a:indent) . a:text)
+endfunction
+
+function! AppendCallFunctionIndented(name, indent)
+  call AppendIndented('@' . a:name . '()', a:indent)
+endfunction
+
+function! AppendDefineFunctionIndented(name, indent)
+  call AppendIndented(a:name . ': ->', a:indent)
+endfunction
+
+function! AppendBodyMethod(body)
+  for line in a:body
+    execute "normal! j"
+    call append('.', line)
+  endfor
+endfunction
+
+function! MoveToTargetPaste()
+  "execute "normal! G"
+  call NextIndent(0, 0, 1, 0)
+  execute "normal! k"
+endfunction
+
 "
 function! CRExtractMethod() range
   let name      = AskFor('Method name')
   let indent    = indent(line('.'))
   let selection = split(common#cut_visual_selection(), '\n')
-  call AppendNameIndented(name, indent)
-  execute "normal! G"
-  call append('.', name . ': ->')
-  for i in selection
-    "call setline('.', curline . '6' . name . i )
-    execute "normal! G"
-    call append('.', i)
-  endfor
+  call AppendCallFunctionIndented(name, indent)
+  call MoveToTargetPaste()
+  call AppendDefineFunctionIndented(name, indent - 2)
+  call AppendBodyMethod(selection)
+  execute "normal! j"
+  call append('.', '')
+  "TODO Please HELP! i don't remember why there is this line ?
   execute "normal! \"kdG\"kp"
 endfunction
+
+"call append('.', name . ': ->')
+"call AppendNameIndented(name, indent)
+"call setline('.', curline . '6' . name . i )

@@ -72,7 +72,7 @@ describe "extract method" do
   let(:filename) { 'extract_method.coffee' }
   #  Scenario: Extract one line assignment into a new method
   #    Given I have the following code:
-  specify "with params" do
+  specify "without params" do
     set_file_contents <<-EOF
 class Foo
   method_one: ->
@@ -80,11 +80,7 @@ class Foo
     b = 2
     c = 3
     EOF
-    vim.command 'set number'
-    vim.command 'hi Visual  guifg=#FFFF00 guibg=#003322 gui=none'
-    vim.edit filename
-    vim.feedkeys '\\<esc>'
-    sleep 2 if WITH_PAUSES
+    set_up
     vim.write
     vim.select_lines 4, 5
     sleep 2 if WITH_PAUSES
@@ -94,7 +90,8 @@ class Foo
     sleep 2 if WITH_PAUSES
     # And I fill in the parameter "add"
     vim.feedkeys 'add\\<CR>'
-    sleep 5 if WITH_PAUSES or WITH_END_PAUSES
+    sleep 4 if WITH_PAUSES or WITH_END_PAUSES
+    vim.feedkeys ':w\\<CR>'
 
     #    Then I should see:
     assert_file_contents <<-EOF 
@@ -114,3 +111,12 @@ end
 # NOTE test first extract method 
 # without params
 #
+#
+
+def set_up
+    vim.command 'set number'
+    vim.command 'hi Visual  guifg=#FFFF00 guibg=#003322 gui=none'
+    vim.edit filename
+    vim.feedkeys '\\<esc>'
+    sleep 2 if WITH_PAUSES
+end
