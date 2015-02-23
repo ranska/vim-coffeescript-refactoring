@@ -3,6 +3,10 @@ rvm:
   - 2.1.0 
 #install:
 #    - bundle
+before_install: sudo apt-get install vim-gtk
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 script:
     #- vim --version
     - bundle exec rspec spec/plugin/extract_method_spec.rb
