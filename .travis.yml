@@ -1,6 +1,8 @@
 language: ruby
-install:
-    - bundle
+rvm:
+  - 2.1.0 
+#install:
+#    - bundle
 script:
     #- vim --version
     - rspec spec/plugin/extract_method_spec.rb
