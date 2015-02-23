@@ -1,6 +1,7 @@
 " Load all refactoring recipes
 exec 'runtime ' . resolve(expand('<sfile>:p:h')) . '/patterns/all/*.vim'
 
+" Next Indent {{{
 " Jump to the next or previous line that has the same level or a lower
 " level of indentation than the current line.
 "
@@ -12,6 +13,7 @@ exec 'runtime ' . resolve(expand('<sfile>:p:h')) . '/patterns/all/*.vim'
 " false: Go to line with the same indentation level
 " skipblanks (bool): true: Skip blank lines
 " false: Don't skip blank lines
+" {{{
 function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
   let line = line('.')
   let column = col('.')
@@ -33,7 +35,7 @@ function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
     endif
   endwhile
 endfunction
-
+" }}}
 " Moving back and forth between lines of same or lower indentation.
 "nnoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
 "nnoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
@@ -47,7 +49,7 @@ endfunction
 "onoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
 "onoremap <silent> [L :call NextIndent(1, 0, 1, 1)<CR>
 "onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
-
+" }}}
 
 function! AskFor(something)
   call inputsave()
@@ -55,22 +57,7 @@ function! AskFor(something)
   call inputrestore()
   return name
 endfunction
-"work in progress
-" 1) select line 
-" https://github.com/ecomba/vim-ruby-refactoring/blob/master/plugin/refactorings/general/extractmethod.vim
-" 2) cut line
-" 3) input fonction name
-"---> 4) write fonction name
-" 5) move next indent lower level
-" 6) write function name
-" 7) paste core method
-" message for check params
-"
-
-" simple version: extract method with name and past at endoffile
-"
-
-"
+" Append functions {{{
 function! AppendNameIndented(name, indent)
   call append('.', repeat(' ', a:indent) . '@' . a:name . '()')
 endfunction
@@ -94,13 +81,27 @@ function! AppendBodyMethod(body)
   endfor
 endfunction
 
+" }}}
+
 function! MoveToTargetPaste()
   "execute "normal! G"
   call NextIndent(0, 0, 1, 0)
   execute "normal! k"
 endfunction
 
+"work in progress
+" 1) select line 
+" https://github.com/ecomba/vim-ruby-refactoring/blob/master/plugin/refactorings/general/extractmethod.vim
+" 2) cut line
+" 3) input fonction name
+"---> 4) write fonction name
+" 5) move next indent lower level
+" 6) write function name
+" 7) paste core method
+" message for check params
+" simple version: extract method with name and past at endoffile
 "
+" extract method {{{
 function! CRExtractMethod() range
   let name      = AskFor('Method name')
   let indent    = indent(line('.'))
@@ -114,7 +115,7 @@ function! CRExtractMethod() range
   "TODO Please HELP! i don't remember why there is this line ?
   execute "normal! \"kdG\"kp"
 endfunction
-
+" }}}
 "call append('.', name . ': ->')
 "call AppendNameIndented(name, indent)
 "call setline('.', curline . '6' . name . i )
