@@ -1,3 +1,4 @@
+[![Travis CI   ](http://img.shields.io/travis/ranska/rang/master.svg)](https://travis-ci.org/ranska/rang)
 [![Stories in Ready](https://badge.waffle.io/ranska/vim-coffeescript-refactoring.png?label=ready&title=Ready)](https://waffle.io/ranska/vim-coffeescript-refactoring)
 vim-coffeescript-refactoring
 ============================
