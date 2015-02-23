@@ -16,7 +16,6 @@ a pull request :)
 You know vimscript please take an issue i will merge tested pull request :)
 
 
-
 Current work in progress
 ========================
 ```
