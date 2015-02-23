@@ -5,4 +5,4 @@ rvm:
 #    - bundle
 script:
     #- vim --version
-    - rspec spec/plugin/extract_method_spec.rb
+    - bundle exec rspec spec/plugin/extract_method_spec.rb
